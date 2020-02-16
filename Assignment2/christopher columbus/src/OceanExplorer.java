@@ -55,6 +55,36 @@ public class OceanExplorer extends Application {
 		shipImageView.setY(b*scale);	//initial position on Y axis
 		oceanMap.initiate(a,b);			//Calling the method initiate 
 		myPane.getChildren().add(shipImageView);
+		
+		Image pirateImage = new Image("pirateShip.png",50,50,true,true); // image path
+		ImageView pirateImageView = new ImageView(pirateImage);
+		int c = rand.nextInt(10);
+		int d = rand.nextInt(10);
+		if(c==a&&d==b) {
+			c = rand.nextInt(10);
+			d = rand.nextInt(10);
+		}
+		pirateImageView.setX(c*scale);
+		pirateImageView.setX(d*scale);
+		oceanMap.initiate(c, d);
+		myPane.getChildren().add(pirateImageView);
+		
+		Image pirateImage1 = new Image("pirateShip.png",50,50,true,true); // image path
+		ImageView pirateImageView1 = new ImageView(pirateImage1);
+		int e = rand.nextInt(10);
+		int f = rand.nextInt(10);
+		if(e==a&&f==b) {
+			e = rand.nextInt(10);
+			f = rand.nextInt(10);
+		}
+		else if(e==c&&f==d) {
+			e = rand.nextInt(10);
+			f = rand.nextInt(10);
+		}
+		pirateImageView1.setX(e*scale);
+		pirateImageView1.setX(f*scale);
+		oceanMap.initiate(e, f);
+		myPane.getChildren().add(pirateImageView1);
 		}
 		catch (Exception e) {
 
