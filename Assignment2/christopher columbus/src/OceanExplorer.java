@@ -28,7 +28,7 @@ public class OceanExplorer extends Application {
 	Scene scene = new Scene(myPane, scale*dimension, scale*dimension);	//creating a new scene
 	Ship ship = new Ship();		//Creating an object for the ship class
 	PirateShip pp = new PirateShip();
-	PirateShip pp1 = new PirateShip();
+	//PirateShip pp1 = new PirateShip();
 	
 	public void setpositions()
 	{
@@ -64,9 +64,10 @@ public class OceanExplorer extends Application {
 		oceanStage.setScene(scene);	//Attaching the scene
 		oceanStage.setTitle("Columbus Game");	//Attaching the Title
 		oceanStage.show();	//Showing the grid
+		ship.addObserver(pp);
+		//ship.addObserver(pp1);
 		startSailing();	//Starting the game
 		
-
 		
 	}
 	
@@ -119,38 +120,17 @@ public class OceanExplorer extends Application {
 //					c = rand.nextInt(10);
 //					d = rand.nextInt(10);
 //				}
-				OceanMap.oceanMap[c][d]=true;		
+			//	OceanMap.oceanMap[c][d]=true;		
 		pshipImageView.setX(c*scale);	//initial position on X axis
 		pshipImageView.setY(d*scale);	//initial position on Y axis
-		pp.initiate(c,d,1);
+		pp.initiate(c*50,d*50);
 		//oceanMap.initiate(c,d);			//Calling the method initiate 
 		//System.out.println(c*scale+" "+d*scale);
 		myPane.getChildren().add(pshipImageView);	
-		
+	}	
 		//-----------------------------------------------------------------------------------
 		//Second pirate ship
-		
-		ppshipImageView = new ImageView(pirateshipImage);
-//		e = rand.nextInt(10);		// Generating a random number from 0 -10
-//		f = rand.nextInt(10);		//Getting a random number from 0 -10
-//		if(e==a&&f==b) {
-//			e = rand.nextInt(10);
-//			f = rand.nextInt(10);
-//		}
-//		else if (e==c||f==d) {
-//			e = rand.nextInt(10);
-//			f = rand.nextInt(10);
-//		}
-		OceanMap.oceanMap[e][f]=true;
-		ppshipImageView.setX(e*scale);	//initial position on X axis
-		ppshipImageView.setY(f*scale);	//initial position on Y axis
-		pp.initiate(e,f,2);
-		//oceanMap.initiate(e,f);			//Calling the method initiate 
-		//System.out.println(e*scale+" "+f*scale);
-		myPane.getChildren().add(ppshipImageView);
-		
-		
-	}
+	
  	private void startSailing() {	//Method to  start Sailing
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>(){
 			
@@ -179,6 +159,15 @@ public class OceanExplorer extends Application {
 				shipImageView.setX(ship.getShipLocation().x);
 				shipImageView.setY(ship.getShipLocation().y);
 				oceanMap.initiate(ship.getShipLocation().x/50, ship.getShipLocation().y/50); //Calling method to store new coordinates
+				
+				
+				pshipImageView.setX(pp.getpirateShipLocation().x);
+				pshipImageView.setY(pp.getpirateShipLocation().y);
+				pp.initiate(pp.getpirateShipLocation().x, pp.getpirateShipLocation().y);
+				
+			//	ppshipImageView.setX(pp.getpirateShipLocation().x*50);
+			//	ppshipImageView.setX(pp.getpirateShipLocation().y*50);
+			//	pp.initiate(pp.getpirateShipLocation().x, pp.getpirateShipLocation().y, 2);
 				
 			}
 		});

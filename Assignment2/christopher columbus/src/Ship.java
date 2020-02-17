@@ -1,10 +1,20 @@
 import java.awt.Point;
-
-public class Ship {
+import java.util.Observable;
+public class Ship extends Observable {
 int scale = 50;
 int xCell;
 int yCell;
-	public Point goEast(int x,int y) { 	//Method when right arrow is pressed
+Point myPosition = new Point(0,0);
+Point targetPosition;
+
+public Ship()
+{
+	targetPosition = new Point(0,0);
+
+}
+
+
+	public void goEast(int x,int y) { 	//Method when right arrow is pressed
 		if(x<450&&OceanMap.oceanMap[x/50+1][y/50]==false) {	// If the ship is in bounds
 			xCell = x+50;	// Move the ship to next right cell
 			 yCell = y;	
@@ -14,11 +24,14 @@ int yCell;
 			xCell=xCell;	
 			yCell=yCell;
 		}
+		setChanged();
+		notifyObservers(); 
+		
 		 OceanMap.oceanMap[xCell/50][yCell/50]=true;
-		return new Point(xCell,yCell);	//Return the positions
+		
 		
 	}
-	public Point goWest(int x,int y) {	//Method when left arrow is pressed
+	public void goWest(int x,int y) {	//Method when left arrow is pressed
 		if(x>0&&OceanMap.oceanMap[x/50-1][y/50]==false) {	// If the ship is in bounds
 		 xCell = x-50;	//Move the ship to the next left cell
 		 yCell = y;
@@ -28,11 +41,13 @@ int yCell;
 			xCell=xCell;
 			yCell=yCell;
 		}
+		setChanged();
+		notifyObservers(); 
 		OceanMap.oceanMap[xCell/50][yCell/50]=true;
-		return new Point(xCell,yCell);	//Return the posistions
+		
 		
 	}
-	public Point goNorth(int x,int y) {	//Method when up arrow is pressed
+	public void goNorth(int x,int y) {	//Method when up arrow is pressed
 		if(y>0&&OceanMap.oceanMap[x/50][y/50-1]==false) {	// If the ship is in bounds
 		xCell = x;
 		 yCell = y-50;	//Move the ship to the next down cell
@@ -42,11 +57,13 @@ int yCell;
 			xCell=xCell;
 			yCell=yCell;
 		}
+		setChanged();
+		notifyObservers(); 
 		OceanMap.oceanMap[xCell/50][yCell/50]=true;
-		return new Point(xCell,yCell);	//Return the positions
+		
 		
 	}
-	public Point goSouth(int x,int y) {	//Method when down arrow is pressed
+	public void goSouth(int x,int y) {	//Method when down arrow is pressed
 		if(y<450&&OceanMap.oceanMap[x/50][y/50+1]==false) { 	// If the ship is in bounds
 		xCell = x;
 		 yCell = y+50;	//Move the ship to the next upper cell
@@ -56,14 +73,19 @@ int yCell;
 			xCell=xCell;
 			yCell=yCell;
 		}
+		setChanged();
+		notifyObservers(); 
 		OceanMap.oceanMap[xCell/50][yCell/50]=true;
-		return new Point(xCell,yCell); 	//Return nothing
+		
 		
 	}
 
 	public Point getShipLocation() {
-		
 		return new Point(xCell,yCell); 		//Return the ships coordinates
 	}
 
 }
+
+
+
+
