@@ -3,17 +3,23 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import javafx.event.ActionEvent;
+
 import javafx.application.Application;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import java.lang.Math;
 
+
+import java.lang.Math;
+import javafx.scene.layout.BorderPane;
 public class OceanExplorer extends Application {
 	Random rand = new Random();
 	final int dimension = 10;  //initializing the dimension
@@ -29,9 +35,42 @@ public class OceanExplorer extends Application {
 	Ship ship = new Ship();		//Creating an object for the ship class
 	PirateShip pp = new PirateShip();
 	PirateShip pp1 = new PirateShip();
+	Stage oc = new Stage();
+	Button button = new Button("Close Button");
+
+	public void start(Stage oceanStage) throws Exception {
+		oc = oceanStage;
+		drawMap();	//Calling the drawMap method
+		setpositions();
+		loadShipImage();	//Calling the loadShipImage Method
+		loadPirateShipImage();
+		oceanStage.setScene(scene);	//Attaching the scene
+		oceanStage.setTitle("Columbus Game");	//Attaching the Title
+		oceanStage.show();	//Showing the grid
+		ship.addObserver(pp);
+		ship.addObserver(pp1);
+		startSailing();	//Starting the game
+		
+	}
 	
-	public void setpositions()
-	{
+	
+	public void quit() {
+		  
+		  
+			Scene scene1 = new Scene(button,100,50);
+			Stage primaryStage = new Stage();
+			button.setOnAction(new EventHandler<ActionEvent>() {
+	            @Override
+	            public void handle(ActionEvent event) {
+	                oc.close();
+	                primaryStage.close();
+	            }
+	        });
+			primaryStage.setScene(scene1);
+			primaryStage.show();
+		}
+	public void setpositions(){
+		
 		ArrayList<Integer> list1 = new ArrayList<Integer>();	//initializing the list
 		
 		for(int i=0;i<10;i++) {
@@ -51,28 +90,6 @@ public class OceanExplorer extends Application {
 		i = list1.get(8);
 	}
 	
-	
-	
-	
-	
-	public void start(Stage oceanStage) throws Exception {
-		
-		drawMap();	//Calling the drawMap method
-		setpositions();
-		loadShipImage();	//Calling the loadShipImage Method
-		loadPirateShipImage();
-		oceanStage.setScene(scene);	//Attaching the scene
-		oceanStage.setTitle("Columbus Game");	//Attaching the Title
-		oceanStage.show();	//Showing the grid
-		ship.addObserver(pp);
-		ship.addObserver(pp1);
-		startSailing();	//Starting the game
-		
-		
-	}
-	
-	
-	
 	public void drawMap() {		//Method to draw the map
 		for (int x = 0; x < dimension; x++) {
 			for (int y = 0; y < dimension; y++) {
@@ -83,6 +100,13 @@ public class OceanExplorer extends Application {
 			}
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
 	public void loadShipImage() { 	//Method to load the ship image
 		try {
 			
@@ -95,20 +119,15 @@ public class OceanExplorer extends Application {
 		oceanMap.initiate(a,b);			//Calling the method initiate 
 		//System.out.println(a*scale+" "+b*scale);
 		myPane.getChildren().add(shipImageView);
-		
-		//----------------------------------------------------------------------------------
-		
-		
-		
 		}
-		catch (Exception e) {
-
-		    // generic exception handling
+		catch (Exception e) { // generic exception handling
 		    e.printStackTrace();
-		
 		}
-		
 	}
+	
+	
+	
+	
 	
 	public void loadPirateShipImage() {
 		//First pirate ship
@@ -137,6 +156,12 @@ public class OceanExplorer extends Application {
 		pp1.initiate(e*50,f*50);
 		myPane.getChildren().add(ppshipImageView);
 	}
+	
+	
+	
+	
+	
+	
  	private void startSailing() {	//Method to  start Sailing
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>(){
 			
@@ -178,6 +203,15 @@ public class OceanExplorer extends Application {
 				System.out.println(pp1.getpirateShipLocation().x+" "+pp1.getpirateShipLocation().y);
 				pp1.initiate(pp1.getpirateShipLocation().x, pp1.getpirateShipLocation().y);
 				
+				if(ship.getShipLocation().equals(pp.getpirateShipLocation())||ship.getShipLocation().equals(pp1.getpirateShipLocation())) {
+					try {
+					
+							quit();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 			}
 		});
 	}
