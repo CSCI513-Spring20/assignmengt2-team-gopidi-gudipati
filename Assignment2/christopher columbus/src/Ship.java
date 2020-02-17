@@ -1,8 +1,9 @@
-
-
+import java.util.Observable;
 import java.awt.Point;
+import java.util.Observer;
+import java.util.*;
 
-public class Ship {
+public class Ship extends Observable{
 int scale = 50;
 int xCell;
 int yCell;
@@ -16,7 +17,9 @@ int yCell;
 			xCell=xCell;	
 			yCell=yCell;
 		}
-		
+		setChanged(); 
+        System.out.println("Change status with setChanged :" + hasChanged());
+        notifyObservers(); 
 		return new Point(xCell,yCell);	//Return the positions
 		
 	}
@@ -30,7 +33,9 @@ int yCell;
 			xCell=xCell;
 			yCell=yCell;
 		}
-		
+		setChanged(); 
+        System.out.println("Change status with setChanged :" + hasChanged());
+        notifyObservers(); 
 		return new Point(xCell,yCell);	//Return the posistions
 		
 	}
@@ -44,7 +49,9 @@ int yCell;
 			xCell=xCell;
 			yCell=yCell;
 		}
-		
+		setChanged(); 
+        System.out.println("Change status with setChanged :" + hasChanged());
+        notifyObservers(); 
 		return new Point(xCell,yCell);	//Return the positions
 		
 	}
@@ -58,7 +65,9 @@ int yCell;
 			xCell=xCell;
 			yCell=yCell;
 		}
-		
+		setChanged(); 
+        System.out.println("Change status with setChanged :" + hasChanged());
+        notifyObservers(); 
 		return new Point(xCell,yCell); 	//Return nothing
 		
 	}
@@ -67,5 +76,7 @@ int yCell;
 		
 		return new Point(xCell,yCell); 		//Return the ships coordinates
 	}
+	 
 
+	
 }

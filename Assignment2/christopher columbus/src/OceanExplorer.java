@@ -26,6 +26,7 @@ public class OceanExplorer extends Application {
 	AnchorPane myPane = new AnchorPane();	// creating an object for anchorpane
 	Scene scene = new Scene(myPane, scale*dimension, scale*dimension);	//creating a new scene
 	Ship ship = new Ship();		//Creating an object for the ship class
+	PirateShip pp = new PirateShip();
 	public void start(Stage oceanStage) throws Exception {
 		
 		drawMap();	//Calling the drawMap method
@@ -35,6 +36,8 @@ public class OceanExplorer extends Application {
 		oceanStage.setTitle("Columbus Game");	//Attaching the Title
 		oceanStage.show();	//Showing the grid
 		startSailing();	//Starting the game
+		ship.addObserver(pp);
+
 		
 	}
 	
