@@ -1,9 +1,7 @@
-
-
 import java.awt.Point;
 
 public class OceanMap {
-	boolean[][] oceanMap = new boolean[10][10];	//Initializing the grid size
+	static boolean[][] oceanMap = new boolean[10][10];	//Initializing the grid size
 	int xCell ;
 	int yCell ;
 	int scale =50;
