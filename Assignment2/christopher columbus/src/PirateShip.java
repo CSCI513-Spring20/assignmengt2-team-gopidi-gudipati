@@ -12,14 +12,14 @@ int c,d;
 public void update(Observable o, Object arg) {
 	// TODO Auto-generated method stub
 	if(o instanceof Ship) {
-		sship = ((Ship)o).getShipLocation();
+		sship = ((Ship)o).getShipLocation();	//Getting the ship positions
 	//	System.out.println("Ship coordinates "+sship.x+" "+sship.y);
 	//	System.out.println("_____________________________");
-		movepShip();	
+		movepShip();	//calling the move method
 	}
 }
 
-	public void initiate(int a, int b) {
+	public void initiate(int a, int b) {	//method to get the positions of the pirate ship
 		c=a/50;d=b/50;
 		
 		
@@ -28,7 +28,7 @@ public void update(Observable o, Object arg) {
 		//System.out.println("PirateShip values "+a+" "+b);
 	}
 
-	public void movepShip() {
+	public void movepShip() {	//method to move the pirate ship to catch the ship
 		//System.out.println("Moved");
 		if(c+1<10&&d+1<10&&pirateship.x - sship.x < 0&&pirateship.y - sship.y < 0) {
 			if(OceanMap.oceanMap[c+1][d+1]==false) {
@@ -78,7 +78,7 @@ public void update(Observable o, Object arg) {
 		 }
 		 }
 	
-public Point getpirateShipLocation() {
+public Point getpirateShipLocation() {	//method to get the positions of the pirate ship
 		
 		return new Point(pirateship.x,pirateship.y); 		//Return the ships coordinates
 	}

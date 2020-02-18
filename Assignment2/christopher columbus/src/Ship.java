@@ -19,7 +19,7 @@ int yCell;
 			xCell=x;	
 			yCell=y;
 		}
-		setChanged();
+		setChanged();	
 		notifyObservers(); 
 		
 		 

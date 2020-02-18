@@ -37,7 +37,7 @@ public class OceanExplorer extends Application {
 	Stage oc = new Stage();
 	
 
-	public void start(Stage oceanStage) throws Exception {
+	public void start(Stage oceanStage) throws Exception {	//start method for the GUI
 		oc = oceanStage;
 		drawMap();	//Calling the drawMap method
 		setpositions();
@@ -54,25 +54,26 @@ public class OceanExplorer extends Application {
 	}
 	
 	
-	public void quit() {
+	public void quit() {		//Method to close the stage
 		  
 		  	//AnchorPane ap = new AnchorPane();
-		Button button = new Button("Game Over");
-			Scene scene1 = new Scene(button,100,100);
+		Button button = new Button("Game Over");	// Initiating the button 
+			Scene scene1 = new Scene(button,100,100);	//Initiating the scene
 			Stage primaryStage = new Stage();
-			button.setOnAction(new EventHandler<ActionEvent>() {
+			button.setOnAction(new EventHandler<ActionEvent>() {	//event handler for the button
 	            @Override
 	            public void handle(ActionEvent event) {
-	                oc.close();
-	                primaryStage.close();
+	                oc.close();		//close the stage
+	                primaryStage.close();	
 	              
 	            }
 	        });
-			//ap.getChildren().add(button);
-			primaryStage.setScene(scene1);
-			primaryStage.show();
+			primaryStage.setScene(scene1);	//setting the scene to the stage
+			primaryStage.show();		//showing the stage
 		}
-	public void setpositions(){
+	
+	
+	public void setpositions(){		//method to set the positions of the ships and islands
 		
 		ArrayList<Integer> list1 = new ArrayList<Integer>();	//initializing the list
 		
@@ -105,7 +106,7 @@ public class OceanExplorer extends Application {
 	}
 	
 	
-	public void loadislands() {
+	public void loadislands() {		//method to load the islands
 		Image island = new Image("island.jpg",50,50,true,true);
 		ImageView islandview1 = new ImageView(island);
 		islandview1.setX(g*scale);
@@ -167,7 +168,7 @@ public class OceanExplorer extends Application {
 	
 	
 	
-	public void loadPirateShipImage() {
+	public void loadPirateShipImage() {	//Method to load the pirate ship image
 		//First pirate ship
 		Image pirateshipImage = new Image("pirateShip.png",50,50,true,true); // image path 
 		pshipImageView = new ImageView(pirateshipImage);		
@@ -218,22 +219,24 @@ public class OceanExplorer extends Application {
 				default :
 					break;	
 				}
-				shipImageView.setX(ship.getShipLocation().x);
-				shipImageView.setY(ship.getShipLocation().y);
+				shipImageView.setX(ship.getShipLocation().x);	//Setting the image of ship to its new coordinates
+				shipImageView.setY(ship.getShipLocation().y);	//Setting the image of ship to its new coordinates
 			//	System.out.println(ship.getShipLocation().x+" "+ship.getShipLocation().x);
 				oceanMap.initiate(ship.getShipLocation().x/50, ship.getShipLocation().y/50); //Calling method to store new coordinates
 				
 				
-				pshipImageView.setX(pp.getpirateShipLocation().x);
-				pshipImageView.setY(pp.getpirateShipLocation().y);
+				pshipImageView.setX(pp.getpirateShipLocation().x);	//Setting the image of ship to its new coordinates
+				pshipImageView.setY(pp.getpirateShipLocation().y);	//Setting the image of ship to its new coordinates
 			//	System.out.println(pp.getpirateShipLocation().x+" "+pp.getpirateShipLocation().y);
 				pp.initiate(pp.getpirateShipLocation().x, pp.getpirateShipLocation().y);
 				
-				ppshipImageView.setX(pp1.getpirateShipLocation().x);
-				ppshipImageView.setY(pp1.getpirateShipLocation().y);
+				ppshipImageView.setX(pp1.getpirateShipLocation().x);	//Setting the image of ship to its new coordinates
+				ppshipImageView.setY(pp1.getpirateShipLocation().y);	//Setting the image of ship to its new coordinates
 			//	System.out.println(pp1.getpirateShipLocation().x+" "+pp1.getpirateShipLocation().y);
 				pp1.initiate(pp1.getpirateShipLocation().x, pp1.getpirateShipLocation().y);
 				
+				
+				//condition when the game is over
 				if(ship.getShipLocation().equals(pp.getpirateShipLocation())||ship.getShipLocation().equals(pp1.getpirateShipLocation())) {
 					try {
 					
