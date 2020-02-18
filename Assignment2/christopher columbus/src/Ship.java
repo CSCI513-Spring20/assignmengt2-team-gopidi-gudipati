@@ -1,11 +1,10 @@
 import java.awt.Point;
 import java.util.Observable;
 public class Ship extends Observable {
-int scale = 50;
+
 int xCell;
 int yCell;
-Point myPosition = new Point(0,0);
-Point targetPosition;
+
 
 
 

@@ -6,7 +6,7 @@ import java.util.Observer;
 public class PirateShip implements Observer {
 Point pirateship;
 Point sship;
-int ID;
+
 int c,d;
 @Override
 public void update(Observable o, Object arg) {

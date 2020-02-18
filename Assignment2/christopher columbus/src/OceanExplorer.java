@@ -28,7 +28,7 @@ public class OceanExplorer extends Application {
 	ImageView ppshipImageView;
 	static int a,b,c,d,e,f,g,h,i;
 	OceanMap oceanMap = new OceanMap();		//creating a object of oceamMap
-	boolean[][] oceanGrid = oceanMap.getMap();	
+	//boolean[][] oceanGrid = oceanMap.getMap();	
 	AnchorPane myPane = new AnchorPane();	// creating an object for anchorpane
 	Scene scene = new Scene(myPane, scale*dimension, scale*dimension);	//creating a new scene
 	Ship ship = new Ship();		//Creating an object for the ship class

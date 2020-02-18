@@ -4,7 +4,7 @@ public class OceanMap {
 	static boolean[][] oceanMap = new boolean[10][10];	//Initializing the grid size
 	int xCell ;
 	int yCell ;
-	int scale =50;
+	
 	public void initiate(int a, int b) {
 		//System.out.println(a+" "+b);
 		xCell =a;
