@@ -17,7 +17,6 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-
 import java.lang.Math;
 import javafx.scene.layout.BorderPane;
 public class OceanExplorer extends Application {
@@ -36,12 +35,13 @@ public class OceanExplorer extends Application {
 	PirateShip pp = new PirateShip();
 	PirateShip pp1 = new PirateShip();
 	Stage oc = new Stage();
-	Button button = new Button("Close Button");
+	
 
 	public void start(Stage oceanStage) throws Exception {
 		oc = oceanStage;
 		drawMap();	//Calling the drawMap method
 		setpositions();
+		loadislands();
 		loadShipImage();	//Calling the loadShipImage Method
 		loadPirateShipImage();
 		oceanStage.setScene(scene);	//Attaching the scene
@@ -56,16 +56,19 @@ public class OceanExplorer extends Application {
 	
 	public void quit() {
 		  
-		  
-			Scene scene1 = new Scene(button,100,50);
+		  	//AnchorPane ap = new AnchorPane();
+		Button button = new Button("Game Over");
+			Scene scene1 = new Scene(button,100,100);
 			Stage primaryStage = new Stage();
 			button.setOnAction(new EventHandler<ActionEvent>() {
 	            @Override
 	            public void handle(ActionEvent event) {
 	                oc.close();
 	                primaryStage.close();
+	              
 	            }
 	        });
+			//ap.getChildren().add(button);
 			primaryStage.setScene(scene1);
 			primaryStage.show();
 		}
@@ -102,7 +105,42 @@ public class OceanExplorer extends Application {
 	}
 	
 	
+	public void loadislands() {
+		Image island = new Image("island.jpg",50,50,true,true);
+		ImageView islandview1 = new ImageView(island);
+		islandview1.setX(g*scale);
+		islandview1.setY(a*scale);
+		myPane.getChildren().add(islandview1);
+		
+		ImageView islandview2 = new ImageView(island);
+		islandview2.setX(h*scale);
+		islandview2.setY(b*scale);
+		myPane.getChildren().add(islandview2);
+		
+		ImageView islandview3 = new ImageView(island);
+		islandview3.setX(i*scale);
+		islandview3.setY(c*scale);
+		myPane.getChildren().add(islandview3);
+		
+		ImageView islandview4 = new ImageView(island);
+		islandview4.setX(a*scale);
+		islandview4.setY(c*scale);
+		myPane.getChildren().add(islandview4);
+		
+		ImageView islandview5 = new ImageView(island);
+		islandview5.setX(c*scale);
+		islandview5.setY(h*scale);
+		myPane.getChildren().add(islandview5);
+		
 	
+		
+		OceanMap.oceanMap[g][a]=true;
+		OceanMap.oceanMap[h][b]=true;
+		OceanMap.oceanMap[i][c]=true;
+		OceanMap.oceanMap[a][c]=true;
+		OceanMap.oceanMap[c][h]=true;
+		OceanMap.oceanMap[d][i]=true;
+	}
 	
 	
 	
@@ -140,17 +178,10 @@ public class OceanExplorer extends Application {
 	
 		//-----------------------------------------------------------------------------------
 		//Second pirate ship
+		
 		ppshipImageView = new ImageView(pirateshipImage);
-		e = rand.nextInt(10);		// Generating a random number from 0 -10
-		f = rand.nextInt(10);		//Getting a random number from 0 -10
-		if(e==a&&f==b) {
-			e = rand.nextInt(10);
-			f = rand.nextInt(10);
-		}
-		else if (e==c||f==d) {
-			e = rand.nextInt(10);
-			f = rand.nextInt(10);
-		}
+				//Getting a random number from 0 -10
+		
 		ppshipImageView.setX(e*scale);	//initial position on X axis
 		ppshipImageView.setY(f*scale);	//initial position on Y axis
 		pp1.initiate(e*50,f*50);
@@ -189,18 +220,18 @@ public class OceanExplorer extends Application {
 				}
 				shipImageView.setX(ship.getShipLocation().x);
 				shipImageView.setY(ship.getShipLocation().y);
-				System.out.println(ship.getShipLocation().x+" "+ship.getShipLocation().x);
+			//	System.out.println(ship.getShipLocation().x+" "+ship.getShipLocation().x);
 				oceanMap.initiate(ship.getShipLocation().x/50, ship.getShipLocation().y/50); //Calling method to store new coordinates
 				
 				
 				pshipImageView.setX(pp.getpirateShipLocation().x);
 				pshipImageView.setY(pp.getpirateShipLocation().y);
-				System.out.println(pp.getpirateShipLocation().x+" "+pp.getpirateShipLocation().y);
+			//	System.out.println(pp.getpirateShipLocation().x+" "+pp.getpirateShipLocation().y);
 				pp.initiate(pp.getpirateShipLocation().x, pp.getpirateShipLocation().y);
 				
 				ppshipImageView.setX(pp1.getpirateShipLocation().x);
 				ppshipImageView.setY(pp1.getpirateShipLocation().y);
-				System.out.println(pp1.getpirateShipLocation().x+" "+pp1.getpirateShipLocation().y);
+			//	System.out.println(pp1.getpirateShipLocation().x+" "+pp1.getpirateShipLocation().y);
 				pp1.initiate(pp1.getpirateShipLocation().x, pp1.getpirateShipLocation().y);
 				
 				if(ship.getShipLocation().equals(pp.getpirateShipLocation())||ship.getShipLocation().equals(pp1.getpirateShipLocation())) {

@@ -21,7 +21,7 @@ public void update(Observable o, Object arg) {
 
 	public void initiate(int a, int b) {
 		c=a/50;d=b/50;
-		OceanMap.oceanMap[c][d]= true;
+		
 		
 		pirateship =new Point(a,b);
 		
@@ -30,22 +30,51 @@ public void update(Observable o, Object arg) {
 
 	public void movepShip() {
 		//System.out.println("Moved");
-		if (c+1<10&&pirateship.x - sship.x < 0) {
+		if(c+1<10&&d+1<10&&pirateship.x - sship.x < 0&&pirateship.y - sship.y < 0) {
+			if(OceanMap.oceanMap[c+1][d+1]==false) {
+				pirateship.x=pirateship.x+50;
+				pirateship.y=pirateship.y+50;
+			}
+		}
+		else if(c+1<10&&d-1>-1&&pirateship.x - sship.x < 0&&pirateship.y - sship.y > 0) {
+			if(OceanMap.oceanMap[c+1][d-1]==false) {
+				pirateship.x=pirateship.x+50;
+				pirateship.y=pirateship.y-50;
+			}
+		}
+		else if(c-1>-1&&d-1>-1&&pirateship.x - sship.x > 0&&pirateship.y - sship.y > 0) {
+			if(OceanMap.oceanMap[c-1][d-1]==false) {
+				pirateship.x=pirateship.x-50;
+				pirateship.y=pirateship.y-50;
+			}
+		}
+		else if(c-1>-1&&d+1<10&&pirateship.x - sship.x > 0&&pirateship.y - sship.y < 0) {
+			if(OceanMap.oceanMap[c-1][d+1]==false) {
+				pirateship.x=pirateship.x-50;
+				pirateship.y=pirateship.y+50;
+			}
+		}
+		
+		else if(c+1<10&&pirateship.x - sship.x < 0) {
+			if(OceanMap.oceanMap[c+1][d]==false) {
 			 pirateship.x = pirateship.x + 50;
-			 
+			}	 
 		 }
 		 else if (c-1>-1&&pirateship.x - sship.x > 0){
+			 if(OceanMap.oceanMap[c-1][d]==false) {
 			 pirateship.x =pirateship.x - 50;
-			 
+			 }	 
 		 }
 		 
-		 if (d+1<10&&pirateship.y - sship.y < 0) {
+		 else if (d+1<10&&pirateship.y - sship.y < 0) {
+			 if(OceanMap.oceanMap[c][d+1]==false) {
 			 pirateship.y = pirateship.y+ 50;
-			 
+			 }	 
 		 }
 		 else if (d-1>-1&&pirateship.y - sship.y > 0){
+			if(OceanMap.oceanMap[c][d-1]==false) {
 			 pirateship.y = pirateship.y-50;
-			 
+			} 
 		 }
 		 }
 	
